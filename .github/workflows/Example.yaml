@@ -3,8 +3,37 @@ name: Example Test
 on: [push, pull_request]
 
 jobs:
-  test:
+  Setup:
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Set-Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+  Dependency:
+    runs-on: ubuntu-latest
+    needs: Setup
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Set-Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      
+      - name: Install Dependencies
+        run: npm install
+
+  Test:
+    runs-on: ubuntu-latest
+    needs: Dependency
 
     steps:
       - name: Checkout Repository
@@ -20,6 +49,13 @@ jobs:
 
       - name: Run Jest Tests
         run: npm test
+
+  Artifact:
+    runs-on: ubuntu-latest
+    needs: Test
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
