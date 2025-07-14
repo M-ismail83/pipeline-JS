@@ -1,13 +1,25 @@
-const btnEl = document.getElementById("calculate");
-const billInput = document.getElementById("bill");
-const tipInput = document.getElementById("tip");
-const totalSpan = document.getElementById("total");
+// index.js
+const billInput = { value: 0 };
+const tipInput = { value: 0 };
+const totalSpan = { innerText: '' };
 
-function calculateTotal() {
-  const billValue = billInput.value;
-  const tipValue = tipInput.value;
-  const totalValue = billValue * (1 + tipValue / 100);
-  totalSpan.innerText = totalValue.toFixed(2);
+function calculateTotal(bill, tip) {
+  const totalValue = bill * (1 + tip / 100);
+  return totalValue.toFixed(2);
 }
 
-btnEl.addEventListener("click", calculateTotal);
+// Event listener'ı sadece uygulama çalışırken ekle
+if (typeof window !== 'undefined') {
+  const btnEl = document.getElementById("calculate");
+  const billInputEl = document.getElementById("bill");
+  const tipInputEl = document.getElementById("tip");
+  const totalSpanEl = document.getElementById("total");
+
+  btnEl.addEventListener("click", () => {
+    const billValue = Number(billInputEl.value);
+    const tipValue = Number(tipInputEl.value);
+    totalSpanEl.innerText = calculateTotal(billValue, tipValue);
+  });
+}
+
+module.exports = calculateTotal;
