@@ -1,0 +1,12 @@
+{
+  "name": "pipeline-js",
+  "version": "1.0.0",
+  "description": "A repo for tyring pipeline with JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
