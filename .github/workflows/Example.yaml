@@ -20,3 +20,12 @@ jobs:
 
       - name: Run Jest Tests
         run: npm test
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-ui
+          path: |
+            index.html
+            index.js
+            style.css
